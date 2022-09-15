@@ -1,0 +1,72 @@
+.content {
+    width: 100%;
+    overflow: scroll;
+}
+.table {
+    color: darkcyan;
+    border-collapse: collapse;
+    border: 1px solid darkcyan;
+    table-layout: fixed; 
+}
+.table__coln {
+    width: 25px;
+}
+.table__col__status {
+    width: 130px;
+}
+.table__col__db {
+    width: 130px;
+}
+.table__col__iin {
+    width: 100px;
+}
+.table__col__name {
+    width: 150px;
+}
+.table__col__department {
+    width: 230px;
+}
+.table__col__management {
+    width: 420px;
+}
+.table__col__phone {
+    width: 100px;
+}
+.table thead td {
+    text-align: center;
+    padding: 5px;
+    color: white;
+    background-color: darkcyan;
+    cursor: pointer;
+}
+.table tbody tr:nth-child(even) {
+    background: lightcyan;
+}
+.table tbody tr:hover {
+    background: darkcyan;
+    color: white;
+    cursor: pointer;
+}
+.table__nothing {
+    text-align: center;
+    font-size: 18pt;
+    font-weight: 700;
+    margin-top: 25px;
+}
+.table input, .table select {
+    font-size: 7pt;
+    font-weight: 540;
+    color: black;
+    border-radius: 4px;
+    padding: 4px;
+}
+.table__row {
+    color: darkcyan;
+}
+.table__row td {
+    font-size: 9pt;
+    font-weight: 550;
+    color: black;
+    padding: 5px;
+    border: 1px solid darkcyan;
+}

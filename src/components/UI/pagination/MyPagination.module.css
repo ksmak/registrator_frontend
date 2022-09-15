@@ -1,0 +1,29 @@
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+.page {
+    text-align: center;
+    width: 30px;
+    padding: 5px;
+    border: 1px solid darkcyan;
+    border-radius: 5px;
+    color: darkcyan;
+    cursor: pointer;
+    margin-right: 15px;
+}
+.page__current {
+    text-align: center;
+    width: 30px;
+    padding: 5px;
+    border: 1px solid darkcyan;
+    border-radius: 5px;
+    color: darkcyan;
+    cursor: pointer;
+    margin-right: 15px;
+    background-color: darkcyan;
+    color: white;
+}

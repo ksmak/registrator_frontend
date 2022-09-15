@@ -1,0 +1,14 @@
+.select {
+    color: darkcyan;
+    font-size: 13pt;
+    border: 1px solid darkcyan;
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.select:disabled {
+    opacity: 1;
+    color: black;
+    background-color: lightcyan;
+}

@@ -1,0 +1,11 @@
+.inputmask {
+    color: darkcyan;
+    font-size: 13pt;
+    border: 1px solid darkcyan;
+    border-radius: 5px;
+    padding: 5px;
+}
+.inputmask:disabled {
+    background-color: lightcyan;
+    color: black;
+}
