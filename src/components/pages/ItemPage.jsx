@@ -52,6 +52,8 @@ const ItemPage = () => {
         job: null, 
         phone: null,
         request_date: null,
+        create_date: null,
+        change_date: null,
     })
     const [edit, setEdit] = useState(false);
     const [formErrors, setFormErrors] = useState({});
@@ -142,6 +144,11 @@ const ItemPage = () => {
                     break;
                 }
                 break;
+            case 'login':
+                if (!value) {
+                    value = userRequest.iin;
+                }    
+                break;
         }
         setFormErrors({...formErrors, [name]: validationError});
         return {isValid, value};
@@ -191,10 +198,6 @@ const ItemPage = () => {
                     return;
                 }
                 
-                if (!userRequest.login) {
-                    setUserRequest({...userRequest, login: userRequest.iin});
-                }
-
                 const response = await api.userRequests.update(userRequest);
                 let postItem = response.data;
                 postItem.checked = false;
@@ -287,6 +290,8 @@ const ItemPage = () => {
             <MyToolbar 
                 buttons={buttons}
             />
+            <div className='form__edit__label'>{userRequest.create_date? 'Создан: ' + new Date(userRequest.create_date).toLocaleString(): ''} {userRequest.create_author? userRequest.create_author: ''}</div>
+            <div className='form__edit__label'>{userRequest.change_date? 'Изменен: ' + new Date(userRequest.change_date).toLocaleString(): ''} {userRequest.change_author? userRequest.change_author: ''}</div>
             <form className='form__edit'>
                 <div className='form__edit__row'>
                     <div className='form__edit__field'>

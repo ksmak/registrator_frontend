@@ -70,6 +70,13 @@ p {
     background-color: darkcyan;
     color: white;
 }
+.form__edit__label {
+    padding-right: 15px;
+    margin-bottom: 10px;
+    text-align: end;
+    color: darkcyan;
+    font-size: 15px;
+}
 .form__edit__row {
     padding-top: 20px;
     padding-bottom: 20px;
