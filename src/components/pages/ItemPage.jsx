@@ -54,6 +54,8 @@ const ItemPage = () => {
         request_date: null,
         create_date: null,
         change_date: null,
+        create_author: null,
+        change_author: null,
     })
     const [edit, setEdit] = useState(false);
     const [formErrors, setFormErrors] = useState({});
@@ -197,7 +199,11 @@ const ItemPage = () => {
                     setFormErrors({...formErrors, phone: 'Ошибка! Такой номер телефона уже существует в базе.'});
                     return;
                 }
-                
+                if (!userRequest.id) {
+                    setUserRequest({...userRequest, create_author: user.username});
+                } else {  
+                    setUserRequest({...userRequest, change_author: user.username});
+                }   
                 const response = await api.userRequests.update(userRequest);
                 let postItem = response.data;
                 postItem.checked = false;

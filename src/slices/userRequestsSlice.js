@@ -56,8 +56,8 @@ export const userRequestsSlice = createSlice({
         setDictionaries: (state, payload) => {
           state.dictionaries = payload.payload;
         },
-        login: (state, username) => {
-          state.user.username = username;
+        login: (state, payload) => {
+          state.user.username = payload.payload.username;
           state.user.isAuthenticate = true;
         },
         logout: (state) => {
