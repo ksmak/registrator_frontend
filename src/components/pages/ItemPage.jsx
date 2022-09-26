@@ -199,11 +199,13 @@ const ItemPage = () => {
                     setFormErrors({...formErrors, phone: 'Ошибка! Такой номер телефона уже существует в базе.'});
                     return;
                 }
+
                 if (!userRequest.id) {
                     setUserRequest({...userRequest, create_author: user.username});
                 } else {  
                     setUserRequest({...userRequest, change_author: user.username});
                 }   
+                
                 const response = await api.userRequests.update(userRequest);
                 let postItem = response.data;
                 postItem.checked = false;
@@ -248,6 +250,49 @@ const ItemPage = () => {
         setUserRequest(obj);
     }
 
+    const onCheckIin = async () => {
+        if (!userRequest.status) {
+            setFormErrors({...formErrors, status: 'Ошибка! Не указан статус!'});
+            return;
+        }
+        if (!userRequest.db) {
+            setFormErrors({...formErrors, db: 'Ошибка! Не указана база данных!'});
+            return;
+        }
+        if (!userRequest.iin) {
+            setFormErrors({...formErrors, iin: 'Ошибка! Не указан ИИН!'});
+            return;
+        }
+        const isDuplicateIIN = await api.userRequests.check_iin(
+            userRequest.id ? userRequest.id : 0, userRequest.status, userRequest.db, userRequest.iin
+        );
+        if (isDuplicateIIN.data.result > 0) {
+            setFormErrors({...formErrors, iin: 'Ошибка! Такой ИИН уже существует в базе.'});
+            return;
+        }
+    }
+
+    const onCheckPhone = async() => {
+        if (!userRequest.status) {
+            setFormErrors({...formErrors, status: 'Ошибка! Не указан статус!'});
+            return;
+        }
+        if (!userRequest.db) {
+            setFormErrors({...formErrors, db: 'Ошибка! Не указана база данных!'});
+            return;
+        }
+        if (!userRequest.phone) {
+            setFormErrors({...formErrors, phone: 'Ошибка! Не указан номер телефона!'});
+            return;
+        }
+        const isDuplicatePhone = await api.userRequests.check_phone(
+            userRequest.id ? userRequest.id : 0, userRequest.status, userRequest.db, userRequest.phone
+        );
+        if (isDuplicatePhone.data.result > 0) {
+            setFormErrors({...formErrors, phone: 'Ошибка! Такой номер телефона уже существует в базе.'});
+            return;
+        }
+    }
     const buttons = [
         {title: 'Копировать', onClick: onCopy, hidden: edit},
         {title: 'Редактировать', onClick: onEdit, hidden: edit},
@@ -329,13 +374,16 @@ const ItemPage = () => {
                             size='12'
                         /> 
                         <MyError error={formErrors.iin}/>  
-                        <button className='button__genpassword'
+                    </div>
+                    <div className='form__edit__field'>
+                        <button className='form__edit__button'
                             onClick={(e) => {
                                 e.preventDefault(); 
+                                onCheckIin();
                             }}
                             hidden={!edit}
                         >
-                            Проверика ИИН
+                            Проверить ИИН
                         </button>
                     </div>
                 </div>
@@ -443,6 +491,17 @@ const ItemPage = () => {
                         />    
                         <MyError error={formErrors.phone}/> 
                     </div>    
+                    <div className='form__edit__field'>
+                        <button className='form__edit__button'
+                            onClick={(e) => {
+                                e.preventDefault(); 
+                                onCheckPhone();
+                            }}
+                            hidden={!edit}
+                        >
+                            Проверить номер телефона
+                        </button>
+                    </div>
                 </div>
                 <div className='form__edit__row'>
                     <div className='form__edit__field'>
@@ -481,7 +540,7 @@ const ItemPage = () => {
                         <MyError error={formErrors.password}/> 
                     </div> 
                     <div className='form__edit__field'>
-                        <button className='button__genpassword'
+                        <button className='form__edit__button'
                             onClick={(e) => {
                                 e.preventDefault(); 
                                 setUserRequest({...userRequest, password: generatePassword()})

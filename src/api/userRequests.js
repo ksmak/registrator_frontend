@@ -29,7 +29,7 @@ export default function(instance) {
             return await instance.get(`user_requests/check_iin/?id=${id}&status=${status}&db=${db}&iin=${iin}`);
         },
         async check_phone(id, status, db, phone) {
-            return await instance.get(`user_requests/check_phone/?id=${id}&status=${status}&db=${db}&phone=${phone}`);
+            return await instance.get(`user_requests/check_phone/?id=${id}&status=${status}&db=${db}&phone=${encodeURIComponent(phone)}`);
         },     
         async print_password(ids) {
             return await instance.get(`user_requests/print/?${ids}`, { responseType: 'blob' });
